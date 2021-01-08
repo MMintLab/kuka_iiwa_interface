@@ -45,26 +45,26 @@
     </link>
 
     <!-- arm to gripper adapter -->
-    <xacro:include filename="$(find victor_description)/urdf/iiwa7_to_robotiq_adapter.xacro"/>
-    <xacro:iia7_to_robotiq_adapter parent="$(arg robot_name)_left_arm_flange" prefix="$(arg robot_name)_left">
-        <origin xyz="0 0 -0.01" rpy="0 0 0"/>
-    </xacro:iia7_to_robotiq_adapter>
-    <xacro:iia7_to_robotiq_adapter parent="$(arg robot_name)_right_arm_flange" prefix="$(arg robot_name)_right">
-        <origin xyz="0 0 -0.01" rpy="0 0 0"/>
-    </xacro:iia7_to_robotiq_adapter>
+    <!-- <xacro:include filename="$(find victor_description)/urdf/iiwa7_to_robotiq_adapter.xacro"/> -->
+    <!-- <xacro:iia7_to_robotiq_adapter parent="$(arg robot_name)_left_arm_flange" prefix="$(arg robot_name)_left"> -->
+    <!--     <origin xyz="0 0 -0.01" rpy="0 0 0"/> -->
+    <!-- </xacro:iia7_to_robotiq_adapter> -->
+    <!-- <xacro:iia7_to_robotiq_adapter parent="$(arg robot_name)_right_arm_flange" prefix="$(arg robot_name)_right"> -->
+    <!--     <origin xyz="0 0 -0.01" rpy="0 0 0"/> -->
+    <!-- </xacro:iia7_to_robotiq_adapter> -->
 
 
-    <!-- Robotiq grippers -->
-    <xacro:if value="${gripper == 'kinematic_robotiq'}">
-        <xacro:include filename="$(find victor_description)/urdf/kinematic_robotiq_grippers.xacro"/>
-    </xacro:if>
-    <xacro:if value="${gripper == 'robotiq'}">
-        <xacro:include filename="$(find victor_description)/urdf/robotiq_grippers.xacro"/>
-    </xacro:if>
+    <!-- <!-\- Robotiq grippers -\-> -->
+    <!-- <xacro:if value="${gripper == 'kinematic_robotiq'}"> -->
+    <!--     <xacro:include filename="$(find victor_description)/urdf/kinematic_robotiq_grippers.xacro"/> -->
+    <!-- </xacro:if> -->
+    <!-- <xacro:if value="${gripper == 'robotiq'}"> -->
+    <!--     <xacro:include filename="$(find victor_description)/urdf/robotiq_grippers.xacro"/> -->
+    <!-- </xacro:if> -->
 
-    <!-- Define additional links as "tools", which are useful for planning and getting transforms -->
-    <xacro:include filename="$(find victor_description)/urdf/robotiq_pinch_grasp_tools.xacro"/>
-    <xacro:robotiq_pinch_grasp_tools robot_name="$(arg robot_name)"/>
+    <!-- <!-\- Define additional links as "tools", which are useful for planning and getting transforms -\-> -->
+    <!-- <xacro:include filename="$(find victor_description)/urdf/robotiq_pinch_grasp_tools.xacro"/> -->
+    <!-- <xacro:robotiq_pinch_grasp_tools robot_name="$(arg robot_name)"/> -->
     <!-- Add Gazebo properties for whole robot -->
     <xacro:include filename="$(find victor_description)/urdf/victor.gazebo.xacro"/>
     <xacro:include filename="$(find victor_description)/urdf/gazebo_utilities.xacro"/>
