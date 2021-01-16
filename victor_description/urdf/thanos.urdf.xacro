@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<robot name="thanos" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:arg name="robot_name" default="thanos"/>
+  <xacro:arg name="kinematic_arms" default="0"/>
+  <xacro:arg name="hardware_interface" default="hardware_interface/PositionJointInterface"/>
+  
+  <!-- Import Rviz colors -->
+  <xacro:include filename="$(find victor_description)/urdf/materials.xacro"/>
+
+  <!-- Make a base link. -->
+  <link name="$(arg robot_name)_base" type="fixed"/>
+  
+  <!-- iiwa arm -->
+  <!-- TODO: Is this the right arm to use or do we need our own urdf? -->
+  <xacro:include filename="$(find victor_description)/urdf/iiwa7.xacro"/>
+
+  <xacro:iiwa7 hardware_interface="$(arg hardware_interface)" robot_name="$(arg robot_name)_kuka"
+               parent="$(arg robot_name)_base" kinematic="$(arg kinematic_arms)">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:iiwa7>
+</robot>
