@@ -15,7 +15,7 @@
     
     <group ns="victor">
 
-        <node pkg="victor_hardware_interface" type="thanos_joint_state_publisher.py" name="joint_state_publisher"/>
+        <node pkg="victor_hardware_interface" type="thanos_joint_state_publisher.py" name="joint_state_publisher" output="screen" />
         <node pkg="robot_state_publisher"     type="robot_state_publisher"    name="robot_state_publisher"/>
         <node pkg="victor_hardware_interface" type="arm_command_gui.py"       name="arm_command_gui"    if="$(arg arm_command_gui)"/>
 
