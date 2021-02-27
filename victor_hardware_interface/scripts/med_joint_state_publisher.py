@@ -44,19 +44,19 @@ def compute_scissor_angle(control):
     return radians(26.0 * control - 16.0)
 
 
-class ThanosJointStatePublisher:
+class MedJointStatePublisher:
     def __init__(self):
         # We don't want to do this programatically, because the callback functions are using assuming a specific order
         # for the joints. We could change the callback functions to remove this assumption, but that would increase the
         # complexity of the callback functions unnecessarily
         self.joint_names = [
-            'thanos_kuka_joint_1',
-            'thanos_kuka_joint_2',
-            'thanos_kuka_joint_3',
-            'thanos_kuka_joint_4',
-            'thanos_kuka_joint_5',
-            'thanos_kuka_joint_6',
-            'thanos_kuka_joint_7',
+            'med_kuka_joint_1',
+            'med_kuka_joint_2',
+            'med_kuka_joint_3',
+            'med_kuka_joint_4',
+            'med_kuka_joint_5',
+            'med_kuka_joint_6',
+            'med_kuka_joint_7',
             ]
 
 
@@ -70,7 +70,7 @@ class ThanosJointStatePublisher:
 
         # Setup the publishers and subscribers that will be used
         self.joint_state_pub = rospy.Publisher("joint_states", JointState, queue_size=1)
-        self.thanos_arm_sub = rospy.Subscriber("left_arm/motion_status", MotionStatus,
+        self.med_arm_sub = rospy.Subscriber("left_arm/motion_status", MotionStatus,
                                                self.left_arm_motion_status_callback)
 
     def run(self, loop_rate):
@@ -107,9 +107,9 @@ class ThanosJointStatePublisher:
 
 
 if __name__ == '__main__':
-    rospy.init_node('thanos_joint_state_publisher')
-    rospy.loginfo('Starting the thanos joint state broadcaster...')
+    rospy.init_node('med_joint_state_publisher')
+    rospy.loginfo('Starting the med joint state broadcaster...')
 
     rate = rospy.get_param("~rate", 10.0)
-    pub = ThanosJointStatePublisher()
+    pub = MedJointStatePublisher()
     pub.run(rate)

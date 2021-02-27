@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<robot name="thanos" xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <xacro:arg name="robot_name" default="thanos"/>
+<robot name="med" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:arg name="robot_name" default="med"/>
   <xacro:arg name="kinematic_arms" default="0"/>
   <xacro:arg name="hardware_interface" default="hardware_interface/PositionJointInterface"/>
   
