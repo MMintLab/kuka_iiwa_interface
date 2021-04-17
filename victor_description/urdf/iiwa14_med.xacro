@@ -83,7 +83,7 @@ v      <self_collision_checking>
         <geometry>
           <mesh filename="package://victor_description/meshes/iiwa14_med/visual/link_1.stl"/>
         </geometry>
-        <material name="Orange"/>
+        <material name="White"/>
       </visual>
       
       <collision>
@@ -91,7 +91,7 @@ v      <self_collision_checking>
         <geometry>
           <mesh filename="package://victor_description/meshes/iiwa14_med/visual/link_1.stl"/>
         </geometry>
-        <material name="Orange"/>
+        <material name="White"/>
       </collision>
     </link>
     
@@ -122,7 +122,7 @@ v      <self_collision_checking>
         <geometry>
           <mesh filename="package://victor_description/meshes/iiwa14_med/visual/A2_origin_updated.stl"/>
         </geometry>
-        <material name="Orange"/>
+        <material name="White"/>
       </visual>
       
       <collision>
@@ -130,7 +130,7 @@ v      <self_collision_checking>
         <geometry>
           <mesh filename="package://victor_description/meshes/iiwa14_med/visual/link_2.stl"/>
         </geometry>
-        <material name="Orange"/>
+        <material name="White"/>
       </collision>
     </link>
     
@@ -161,7 +161,7 @@ v      <self_collision_checking>
         <geometry>
           <mesh filename="package://victor_description/meshes/iiwa14_med/visual/A3_origin_updated.stl"/>
         </geometry>
-        <material name="Orange"/>
+        <material name="White"/>
       </visual>
       
       <collision>
@@ -169,7 +169,7 @@ v      <self_collision_checking>
         <geometry>
           <mesh filename="package://victor_description/meshes/iiwa14_med/visual/link_3.stl"/>
         </geometry>
-        <material name="Orange"/>
+        <material name="White"/>
       </collision>
     </link>
     
@@ -200,7 +200,7 @@ v      <self_collision_checking>
         <geometry>
           <mesh filename="package://victor_description/meshes/iiwa14_med/visual/A4_origin_updated.stl"/>
         </geometry>
-        <material name="Orange"/>
+        <material name="White"/>
       </visual>
       
       <collision>
@@ -208,7 +208,7 @@ v      <self_collision_checking>
         <geometry>
           <mesh filename="package://victor_description/meshes/iiwa14_med/visual/link_4.stl"/>
         </geometry>
-        <material name="Orange"/>
+        <material name="White"/>
       </collision>
     </link>
     
@@ -235,19 +235,19 @@ v      <self_collision_checking>
       </inertial>
       
       <visual>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 3.1415"/>
         <geometry>
           <mesh filename="package://victor_description/meshes/iiwa14_med/visual/A5_origin_updated.stl"/>
         </geometry>
-        <material name="Orange"/>
+        <material name="White"/>
       </visual>
       
       <collision>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 3.1415"/>
         <geometry>
           <mesh filename="package://victor_description/meshes/iiwa14_med/visual/link_5.stl"/>
         </geometry>
-        <material name="Orange"/>
+        <material name="White"/>
       </collision>
     </link>
     
@@ -275,19 +275,19 @@ v      <self_collision_checking>
       </inertial>
       
       <visual>
-        <origin xyz="0 0 0.0607" rpy="3.1415 0 0"/>
+        <origin xyz="0 0 -0.0607" rpy="3.1415 3.1415 0"/>
         <geometry>
           <mesh filename="package://victor_description/meshes/iiwa14_med/visual/A6_origin_updated.stl"/>
         </geometry>
-        <material name="Orange"/>
+        <material name="White"/>
       </visual>
       
       <collision>
-        <origin xyz="0 0 0.0607" rpy="3.1415 0 0"/>
+        <origin xyz="0 0 -0.0607" rpy="3.1415 3.1415 0"/>
         <geometry>
           <mesh filename="package://victor_description/meshes/iiwa14_med/visual/link_6.stl"/>
         </geometry>
-        <material name="Orange"/>
+        <material name="White"/>
       </collision>
     </link>
     
