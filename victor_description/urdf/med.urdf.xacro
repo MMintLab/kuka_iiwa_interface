@@ -10,12 +10,10 @@
   <!-- Make a base link. -->
   <link name="$(arg robot_name)_base" type="fixed"/>
   
-  <!-- iiwa arm -->
-  <!-- TODO: Is this the right arm to use or do we need our own urdf? -->
-  <xacro:include filename="$(find victor_description)/urdf/iiwa7.xacro"/>
+  <!-- iiwa med arm -->
+  <xacro:include filename="$(find victor_description)/urdf/iiwa14_med.xacro"/>
 
-  <xacro:iiwa7 hardware_interface="$(arg hardware_interface)" robot_name="$(arg robot_name)_kuka"
-               parent="$(arg robot_name)_base" kinematic="$(arg kinematic_arms)">
+  <xacro:iiwa14_med hardware_interface="$(arg hardware_interface)" robot_name="$(arg robot_name)_kuka" parent="$(arg robot_name)_base" kinematic="$(arg kinematic_arms)">
     <origin xyz="0 0 0" rpy="0 0 0"/>
-  </xacro:iiwa7>
+  </xacro:iiwa14_med>
 </robot>
