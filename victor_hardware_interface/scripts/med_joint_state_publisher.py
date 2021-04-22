@@ -57,8 +57,9 @@ class MedJointStatePublisher:
             'med_kuka_joint_5',
             'med_kuka_joint_6',
             'med_kuka_joint_7',
+            'wsg50_finger_left_joint',
+            'wsg50_finger_right_joint',
             ]
-
 
         # Setup the output message with default values
         self.joint_state_lock = Lock()
@@ -68,6 +69,9 @@ class MedJointStatePublisher:
         self.joint_state_msg.velocity = []
         self.joint_state_msg.effort = [0] * len(self.joint_names)
 
+        print('WARNING - publishing dummy value for gripper prismatic joints.')
+        self.joint_state_msg.position[-2:] = [-0.055, 0.055]
+        
         # Setup the publishers and subscribers that will be used
         self.joint_state_pub = rospy.Publisher("joint_states", JointState, queue_size=1)
         self.med_arm_sub = rospy.Subscriber("left_arm/motion_status", MotionStatus,
@@ -86,19 +90,19 @@ class MedJointStatePublisher:
 
     def set_arm_position_values(self, motion_status):
         with self.joint_state_lock:
-            self.joint_state_msg.position = jvq_to_list(motion_status.measured_joint_position)
+            self.joint_state_msg.position[:-2] = jvq_to_list(motion_status.measured_joint_position)
 
     def set_arm_velocity_values(self, motion_status):
         # The controller doesn't actually send us velocity value.
         with self.joint_state_lock:
-            self.joint_state_msg.velocity = jvq_to_list(motion_status.measured_joint_velocity)
+            self.joint_state_msg.velocity[:-2] = jvq_to_list(motion_status.measured_joint_velocity)
 
     def set_arm_effort_values(self, motion_status):
         # We use measured joint torque for now. As Kuka mentioned, it is the currently measured "raw" torque sensor
         # data. There is an estimated_external_torque message, which is the current external torque sensor data for
         # this robot.
         with self.joint_state_lock:
-            self.joint_state_msg.effort = jvq_to_list(motion_status.measured_joint_torque)
+            self.joint_state_msg.effort[:-2] = jvq_to_list(motion_status.measured_joint_torque)
 
     def publish_joint_values(self):
         with self.joint_state_lock:
