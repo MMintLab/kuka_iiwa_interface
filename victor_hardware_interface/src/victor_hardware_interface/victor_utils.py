@@ -2,6 +2,8 @@
 
 from enum import Enum
 
+from typing import List, Sequence
+
 import rospy
 from victor_hardware_interface_msgs.msg import *
 from victor_hardware_interface_msgs.srv import *
@@ -54,6 +56,7 @@ def get_joint_position_params(vel, accel):
     new_control_mode.control_mode.mode = ControlMode.JOINT_POSITION
     new_control_mode.joint_path_execution_params.joint_relative_velocity = vel
     new_control_mode.joint_path_execution_params.joint_relative_acceleration = accel
+    new_control_mode.joint_path_execution_params.override_joint_acceleration = 0.0
     return new_control_mode
 
 
@@ -211,6 +214,23 @@ def list_to_jvq(quantity_list):
     return jvq
 
 
+def gripper_status_to_list(gripper_status: Robotiq3FingerStatus) -> List[float]:
+    return [gripper_status.finger_a_status.position,
+            gripper_status.finger_b_status.position,
+            gripper_status.finger_c_status.position,
+            gripper_status.scissor_status.position]
+
+
+def list_to_gripper_status(gripper_status_list: Sequence[float]) -> Robotiq3FingerStatus:
+    assert len(gripper_status_list) == 4, "gripper status list must be length 4"
+    gripper_status = Robotiq3FingerStatus()
+    gripper_status.finger_a_status.position = gripper_status_list[0]
+    gripper_status.finger_b_status.position = gripper_status_list[1]
+    gripper_status.finger_c_status.position = gripper_status_list[2]
+    gripper_status.scissor_status.position = gripper_status_list[3]
+    return gripper_status
+
+
 def default_gripper_command():
     cmd = Robotiq3FingerCommand()
     cmd.finger_a_command.speed = 0.5
@@ -225,3 +245,10 @@ def default_gripper_command():
 
     cmd.scissor_command.position = 1.0
     return cmd
+
+
+def is_gripper_closed(status: Robotiq3FingerStatus):
+    finger_a_closed = status.finger_a_status.position > 0.5 - 1e-2
+    finger_b_closed = status.finger_b_status.position > 0.5 - 1e-2
+    finger_c_closed = status.finger_c_status.position > 0.5 - 1e-2
+    return finger_a_closed and finger_b_closed and finger_c_closed
