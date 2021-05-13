@@ -1,26 +1,35 @@
 <?xml version="1.0"?>
 <robot name="med" xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <xacro:arg name="robot_name" default="med"/>
-  <xacro:arg name="kinematic_arms" default="0"/>
-  <xacro:arg name="hardware_interface" default="hardware_interface/PositionJointInterface"/>
-  
-  <!-- Import Rviz colors -->
-  <xacro:include filename="$(find victor_description)/urdf/materials.xacro"/>
+    <xacro:arg name="robot_name" default="med"/>
+    <xacro:arg name="kinematic_arms" default="0"/>
+    <xacro:arg name="hardware_interface" default="hardware_interface/PositionJointInterface"/>
 
-  <!-- Make a base link. -->
-  <link name="$(arg robot_name)_base" type="fixed"/>
-  
-  <!-- iiwa med arm -->
-  <xacro:include filename="$(find victor_description)/urdf/iiwa14_med.xacro"/>
+    <!-- Import Rviz colors -->
+    <xacro:include filename="$(find victor_description)/urdf/materials.xacro"/>
 
-  <xacro:iiwa14_med hardware_interface="$(arg hardware_interface)" robot_name="$(arg robot_name)_kuka" parent="$(arg robot_name)_base" kinematic="$(arg kinematic_arms)">
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-  </xacro:iiwa14_med>
+    <!-- Make a base link. -->
+    <link name="$(arg robot_name)_base" type="fixed"/>
 
-  <!-- wsg50 gripper -->
-  <xacro:include filename="$(find wsg_50_simulation)/urdf/wsg_50.urdf.xacro"/>
+    <!-- iiwa med arm -->
+    <xacro:include filename="$(find victor_description)/urdf/iiwa14_med.xacro"/>
+    <xacro:iiwa14_med hardware_interface="$(arg hardware_interface)" robot_name="$(arg robot_name)_kuka"
+                      parent="$(arg robot_name)_base" kinematic="$(arg kinematic_arms)">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:iiwa14_med>
 
-  <xacro:wsg_50_xacro name="wsg50" parent="$(arg robot_name)_kuka_link_ee" finger_length="0.023" finger_tip="0">
-    <origin xyz="0 0 0" rpy="0 0 -1.5708"/>
-  </xacro:wsg_50_xacro>
+    <!-- wsg50 gripper -->
+    <xacro:include filename="$(find wsg_50_simulation)/urdf/wsg_50.urdf.xacro"/>
+    <xacro:wsg_50_xacro name="wsg50" parent="$(arg robot_name)_kuka_link_ee" finger_length="0.023"
+                        finger_tip="0" hardware_interface="$(arg hardware_interface)">
+        <origin xyz="0 0 0" rpy="0 0 -1.5708"/>
+    </xacro:wsg_50_xacro>
+
+    <!-- Gazebo setup -->
+    <xacro:include filename="$(find victor_description)/urdf/gazebo_utilities.xacro"/>
+    <!-- Load Gazebo lib and set the robot namespace -->
+    <xacro:add_gazebo_control_plugin robot_namespace="$(arg robot_name)"/>
+    <xacro:add_moveit_planning_scene_plugin robot_namespace="$(arg robot_name)" root_frame_id="$(arg robot_name)_base"/>
+
+    <!-- Rigidly attach Med to the Gazebo world -->
+    <xacro:add_gazebo_fixed_link base_link="$(arg robot_name)_base"/>
 </robot>
