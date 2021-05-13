@@ -74,8 +74,8 @@ class MedJointStatePublisher:
         
         # Setup the publishers and subscribers that will be used
         self.joint_state_pub = rospy.Publisher("joint_states", JointState, queue_size=1)
-        self.med_arm_sub = rospy.Subscriber("left_arm/motion_status", MotionStatus,
-                                               self.left_arm_motion_status_callback)
+        self.med_arm_sub = rospy.Subscriber("motion_status", MotionStatus,
+                                            self.left_arm_motion_status_callback)
 
     def run(self, loop_rate):
         rate = rospy.Rate(loop_rate)
