@@ -199,11 +199,11 @@ class MinimalFakeArmInterface:
 
         self.input_mtx = Lock()
 
+        self.motion_status_msg = self.default_motion_status(arm_name)
         self.control_mode_interface = MinimalFakeControlModeInterface(control_mode_status_topic,
                                                                       get_control_mode_service_topic,
                                                                       set_control_mode_service_topic,
                                                                       initial_control_mode)
-        self.motion_status_msg = self.default_motion_status(arm_name)
 
         self.motion_command_sub = rospy.Subscriber(motion_command_topic, MotionCommand,
                                                    self.arm_motion_command_callback)
