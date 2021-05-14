@@ -41,7 +41,7 @@ class ManualMotion:
         self.threshold = 0.05
         self.arrive_threshold = 0.02
 
-        self.low_pass_tau = 0.01  # seconds
+        self.low_pass_tau = 1e-4  # seconds
         self.prev_time = None
         self.lock = Lock()
         self.follow = False
@@ -116,7 +116,7 @@ if __name__ == "__main__":
     med = Med(robot_namespace="med")
     rospy.loginfo("intializing arm")
 
-    r_cm = Listener("right_arm/control_mode_status", ControlModeParameters)
+    r_cm = Listener("med/control_mode_status", ControlModeParameters)
     cur_mode = r_cm.get(block_until_data=True)
     control_mode_params.joint_path_execution_params.joint_relative_velocity = \
         cur_mode.joint_path_execution_params.joint_relative_velocity
